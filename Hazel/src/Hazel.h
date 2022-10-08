@@ -3,6 +3,7 @@
 // For use Only Hazel application (SandboxApp)
 
 #include "Hazel/Application.h"
+#include "Hazel/Log.h"
 
 
 /********  Entry Point  **************/
