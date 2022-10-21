@@ -29,7 +29,8 @@ project "Hazel"															-- Aquvalent VS .vcxproj file
 
 	includedirs
 	{
-		"%{prj.name}/vendor/spdlog/include",								-- project Hazel include files for Compiler
+		"%{prj.name}/src",
+		"%{prj.name}/vendor/spdlog/include"  							-- project Hazel include files for Compiler
 	}
 
     --For windows platform

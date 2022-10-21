@@ -9,7 +9,7 @@
 
 		Hazel::Log::Init();
 		HZ_CORE_WARN("Core Log!");
-		HZ_INFO("Client Log");
+		HZ_INFO("Client Log !!!");
 		
 		auto app = Hazel::CreateApplication();
 		app->Run();
