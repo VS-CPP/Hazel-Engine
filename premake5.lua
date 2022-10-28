@@ -20,6 +20,8 @@ project "Hazel"															-- Aquvalent VS .vcxproj file
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")					 -- Output director for .exe files -- we create this output path here because output files make in Hazel Project
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")					-- Output director for .obj files -- we create this output path here because output files make in Hazel Project
 	
+    pchheader "hzpch.h"
+    pchsource "Hazel/src/hzpch.cpp"                                    -- it is same: to go in VS open project setting and set pch file for create
 
 	files
 	{
@@ -29,7 +31,7 @@ project "Hazel"															-- Aquvalent VS .vcxproj file
 
 	includedirs
 	{
-		"%{prj.name}/src",
+        "%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include"  							-- project Hazel include files for Compiler
 	}
 
@@ -58,13 +60,13 @@ project "Hazel"															-- Aquvalent VS .vcxproj file
 			defines "HZ_DEBUG"
 			symbols "On"
 
-		filter "configurations:Release"
-			defines "HZ_RELEASE"
-			optimize "On"
+    filter "configurations:Release"
+        defines "HZ_RELEASE"
+        optimize "On"
 
-		filter "configurations:Dist"
-			defines "HZ_DIST"
-			optimize "On"
+    filter "configurations:Dist"
+        defines "HZ_DIST"
+        optimize "On"
 
 
 project "Sandbox"
@@ -73,50 +75,50 @@ project "Sandbox"
     language "C++"
         
         
-            targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-            objdir ("bin-int/" .. outputdir .. "/%{prj.name}") 
-            
-            files
-            {
-                "%{prj.name}/src/**.h",
-                "%{prj.name}/src/**.cpp"
-            }
-        
-            includedirs
-            {
-                "Hazel/vendor/spdlog/include",
-                "Hazel/src"
-            }
-        
-        
-            -- Hazel project Linking to Sadnbox project
-            links
-            {
-                "Hazel"
-            }
-        
-            --For windows platform
-            filter "system:windows"
-                cppdialect "C++17"
-                staticruntime "On"
-                systemversion "latest"
-        
-                -- #defines
-                defines
-                {
-                    "HZ_PLATFORM_WINDOWS"
-                }
-        
-        
-        
-                filter "configurations:Debug"
-                    defines "HZ_DEBUG"
-                    symbols "On"
-        
-                filter "configurations:Release"
-                    defines "HZ_RELEASE"
-                    optimize "On"
-        
-                filter "configurations:Dist"
-                    defines "HZ_DIST"
-                    optimize "On"
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}") 
+    
+    files
+    {
+        "%{prj.name}/src/**.h",
+        "%{prj.name}/src/**.cpp"
+    }
+
+    includedirs
+    {
+        "Hazel/vendor/spdlog/include",
+        "Hazel/src"
+    }
+
+
+    -- Hazel project Linking to Sadnbox project
+    links
+    {
+        "Hazel"
+    }
+
+    --For windows platform
+    filter "system:windows"
+        cppdialect "C++17"
+        staticruntime "On"
+        systemversion "latest"
+
+        -- #defines
+        defines
+        {
+            "HZ_PLATFORM_WINDOWS"
+        }
+
+
+
+        filter "configurations:Debug"
+            defines "HZ_DEBUG"
+            symbols "On"
+
+        filter "configurations:Release"
+            defines "HZ_RELEASE"
+            optimize "On"
+
+        filter "configurations:Dist"
+            defines "HZ_DIST"
+            optimize "On"
