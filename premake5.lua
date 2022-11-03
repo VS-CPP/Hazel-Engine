@@ -9,7 +9,13 @@ workspace "Hazel"
 	}
 
 
-outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}" 
+outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "Hazel/vendor/GLFW/include"
+
+include "Hazel/vendor/GLFW"
 
 
 project "Hazel"															-- Aquvalent VS .vcxproj file
@@ -32,7 +38,14 @@ project "Hazel"															-- Aquvalent VS .vcxproj file
 	includedirs
 	{
         "%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"  							-- project Hazel include files for Compiler
+		"%{prj.name}/vendor/spdlog/include",  							-- project Hazel include files for Compiler
+        "%{IncludeDir.GLFW}"
+	}
+
+    links 
+	{ 
+		"GLFW",
+		"opengl32.lib"
 	}
 
     --For windows platform
