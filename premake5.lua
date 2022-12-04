@@ -14,8 +14,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Hazel/vendor/GLFW/include"
+IncludeDir["Glad"] = "Hazel/vendor/Glad/include"
 
 include "Hazel/vendor/GLFW"
+include "Hazel/vendor/Glad"
 
 
 project "Hazel"															-- Aquvalent VS .vcxproj file
@@ -39,12 +41,14 @@ project "Hazel"															-- Aquvalent VS .vcxproj file
 	{
         "%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",  							-- project Hazel include files for Compiler
-        "%{IncludeDir.GLFW}"
+        "%{IncludeDir.GLFW}",
+        "%{IncludeDir.Glad}"
 	}
 
     links 
 	{ 
 		"GLFW",
+        "Glad",
 		"opengl32.lib"
 	}
 
@@ -59,7 +63,7 @@ project "Hazel"															-- Aquvalent VS .vcxproj file
         {
             "HZ_BUILD_DLL",
             "HZ_PLATFORM_WINDOWS",
-            --"GLFW_INCLUDE_NONE"
+            "GLFW_INCLUDE_NONE"                                         -- for not include OpenGL when include GLFW
         }
 
 
