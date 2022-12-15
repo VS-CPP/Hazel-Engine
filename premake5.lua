@@ -44,6 +44,7 @@ project "Hazel"															-- Aquvalent VS .vcxproj file
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}"
 	}
+    
 
     links 
 	{ 
