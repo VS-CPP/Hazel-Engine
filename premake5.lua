@@ -49,7 +49,8 @@ project "Hazel"															-- Aquvalent VS .vcxproj file
 	{ 
 		"GLFW",
         "Glad",
-		"opengl32.lib"
+		"opengl32.lib",
+        "Dwmapi.lib"
 	}
 
     --For windows platform
