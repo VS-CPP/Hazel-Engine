@@ -15,9 +15,11 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Hazel/vendor/GLFW/include"
 IncludeDir["Glad"] = "Hazel/vendor/Glad/include"
+IncludeDir["ImGui"] = "Hazel/vendor/Imgui"
 
 include "Hazel/vendor/GLFW"
 include "Hazel/vendor/Glad"
+include "Hazel/vendor/Imgui"
 
 
 project "Hazel"															-- Aquvalent VS .vcxproj file
@@ -42,14 +44,16 @@ project "Hazel"															-- Aquvalent VS .vcxproj file
         "%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",  							-- project Hazel include files for Compiler
         "%{IncludeDir.GLFW}",
-        "%{IncludeDir.Glad}"
+        "%{IncludeDir.Glad}",
+        "%{IncludeDir.ImGui}"
 	}
-    
+
 
     links 
 	{ 
 		"GLFW",
         "Glad",
+        "ImGui",
 		"opengl32.lib",
         "Dwmapi.lib"
 	}
