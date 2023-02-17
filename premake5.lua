@@ -1,5 +1,6 @@
 workspace "Hazel"														
-	architecture "x64"													
+	architecture "x64"
+    startproject "Sandbox"											
 
 	configurations
 	{
@@ -17,9 +18,16 @@ IncludeDir["GLFW"] = "Hazel/vendor/GLFW/include"
 IncludeDir["Glad"] = "Hazel/vendor/Glad/include"
 IncludeDir["ImGui"] = "Hazel/vendor/Imgui"
 
-include "Hazel/vendor/GLFW"
-include "Hazel/vendor/Glad"
-include "Hazel/vendor/Imgui"
+--include "Hazel/vendor/GLFW"
+--include "Hazel/vendor/Glad"
+--include "Hazel/vendor/Imgui"
+
+group "Dependenies"
+    include "Hazel/vendor/GLFW"
+    include "Hazel/vendor/Glad"
+    include "Hazel/vendor/Imgui"
+
+group ""
 
 
 project "Hazel"															-- Aquvalent VS .vcxproj file
@@ -82,16 +90,19 @@ project "Hazel"															-- Aquvalent VS .vcxproj file
     filter "configurations:Debug"
 		defines "HZ_DEBUG"
         buildoptions "/MDd"
+        --runtime "Debug"
 		symbols "On"
 
     filter "configurations:Release"
         defines "HZ_RELEASE"
         buildoptions "/MD"
+        --runtime "Release"
         optimize "On"
 
     filter "configurations:Dist"
         defines "HZ_DIST"
         buildoptions "/MD"
+        --runtime "Release"
         optimize "On"
 
 
@@ -140,14 +151,17 @@ project "Sandbox"
     filter "configurations:Debug"
         defines "HZ_DEBUG"
         buildoptions "/MDd"
+        --runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines "HZ_RELEASE"
         buildoptions "/MD"
+        --runtime "Release"
         optimize "On"
 
     filter "configurations:Dist"
         defines "HZ_DIST"
         buildoptions "/MD"
+        --runtime "Release"
         optimize "On"
