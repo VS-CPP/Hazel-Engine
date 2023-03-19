@@ -17,6 +17,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Hazel/vendor/GLFW/include"
 IncludeDir["Glad"] = "Hazel/vendor/Glad/include"
 IncludeDir["ImGui"] = "Hazel/vendor/Imgui"
+IncludeDir["GLM"] = "Hazel/vendor/GLM"
 
 --include "Hazel/vendor/GLFW"
 --include "Hazel/vendor/Glad"
@@ -44,7 +45,9 @@ project "Hazel"															-- Aquvalent VS .vcxproj file
 	files
 	{
 		"%{prj.name}/src/**.h",											-- create all project files ** means that search all .h or .cpp files in src folder or it's subfolder'
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+        "%{prj.name}/vendor/GLM/glm/**.hpp",                            -- Include hpp files
+        "%{prj.name}/vendor/GLM/glm/**.inl"
 	}
 
 	includedirs
@@ -53,7 +56,8 @@ project "Hazel"															-- Aquvalent VS .vcxproj file
 		"%{prj.name}/vendor/spdlog/include",  							-- project Hazel include files for Compiler
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
-        "%{IncludeDir.ImGui}"
+        "%{IncludeDir.ImGui}",
+        "%{IncludeDir.GLM}"
 	}
 
 
@@ -124,7 +128,8 @@ project "Sandbox"
     includedirs
     {
         "Hazel/vendor/spdlog/include",
-        "Hazel/src"
+        "Hazel/src",
+        "%{IncludeDir.GLM}"
     }
 
 
