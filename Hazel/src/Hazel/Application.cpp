@@ -30,6 +30,9 @@ namespace Hazel
 		//glGenVertexArrays(1, &id);
 		//HZ_CORE_INFO("Application::Application Vertex Array Num = {0}", id);
 
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
+
 	}
 
 	void Application::OnEvent(Event& e)
@@ -84,6 +87,12 @@ namespace Hazel
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
+
+			m_ImGuiLayer->Begin();
+			for (Layer* layer : m_LayerStack)
+				layer->OnImGuiRender();
+			m_ImGuiLayer->End();
+
 			
 			//auto[x, y] = Input::GetMousePosition();
 			//HZ_CORE_TRACE("{0}, {1}", x, y);
