@@ -1,10 +1,11 @@
 #include "hzpch.h"
 #include "Application.h"
+#include "Hazel/Renderer/Renderer.h"
 
 #include "Hazel/Log.h"
 
 //#include <GLFW/glfw3.h>
-#include <glad/glad.h>
+//#include <glad/glad.h>
 
 #include "Input.h"
 //#include "Hazel/Renderer/Buffer.h"
@@ -186,13 +187,13 @@ namespace Hazel
 	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);
-		layer->OnAttach();
+		//layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* layer)
 	{
 		m_LayerStack.PushOverlay(layer);
-		layer->OnAttach();
+		//layer->OnAttach();
 	}
 
 	Application::~Application()
@@ -208,17 +209,31 @@ namespace Hazel
 
 		while (m_Running)
 		{
-			glClearColor(0.1f, 0.1f, 0.1f, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
+			//glClearColor(0.1f, 0.1f, 0.1f, 1);
+			//glClear(GL_COLOR_BUFFER_BIT);
+
+			RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
+			RenderCommand::Clear();
+
+			Renderer::BeginScene();
 
 
 			m_BlueShader->Bind();
+			Renderer::Submit(m_SquareVA);
+
+
+			m_Shader->Bind();
+			Renderer::Submit(m_VertexArray);
+
+			Renderer::EndScene();
+
+			/*m_BlueShader->Bind();
 			m_SquareVA->Bind();
 			glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			m_Shader->Bind();
 			m_VertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);*/
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
