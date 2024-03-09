@@ -175,7 +175,7 @@ namespace Hazel
 				break;
 		}
 
-		HZ_CORE_TRACE("{0}", e);
+		HZ_CORE_TRACE("Get Event {0}", e);
 	}
 
 

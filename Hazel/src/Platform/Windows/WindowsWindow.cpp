@@ -155,7 +155,7 @@ namespace Hazel {
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-
+			//HZ_CORE_INFO("Event Cursor {0} ({1})", xPos, yPos);
 			MouseMovedEvent event((float)xPos, (float)yPos);
 			data.EventCallback(event);
 		});
