@@ -2,7 +2,6 @@
 
 #include "RendererAPI.h"
 
-
 namespace Hazel
 {
 	class RenderCommand
