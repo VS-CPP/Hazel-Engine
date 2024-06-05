@@ -162,25 +162,27 @@ public:
 
 	}
 
-	void OnUpdate() override
+	void OnUpdate(Hazel::Timestep ts) override
 	{
 		//if(Hazel::Input::IsKeyPressed(HZ_KEY_TAB))
 			//HZ_INFO("Tab key is pressed");
 
+		HZ_TRACE("OnUpdate: DeltaTime = {0} s - ({1} ms)", ts.GetSeconds(), ts.GetMilliseconds());
+
 		if (Hazel::Input::IsKeyPressed(HZ_KEY_LEFT))
-			m_CamraPosition.x -= m_CameraMoveSpeed;
+			m_CamraPosition.x -= m_CameraMoveSpeed * ts;
 		else if (Hazel::Input::IsKeyPressed(HZ_KEY_RIGHT))
-			m_CamraPosition.x += m_CameraMoveSpeed;
+			m_CamraPosition.x += m_CameraMoveSpeed * ts;
 
 		if (Hazel::Input::IsKeyPressed(HZ_KEY_UP))
-			m_CamraPosition.y += m_CameraMoveSpeed;
+			m_CamraPosition.y += m_CameraMoveSpeed * ts;
 		else if (Hazel::Input::IsKeyPressed(HZ_KEY_DOWN))
-			m_CamraPosition.y -= m_CameraMoveSpeed;
+			m_CamraPosition.y -= m_CameraMoveSpeed * ts;
 
 		if(Hazel::Input::IsKeyPressed(HZ_KEY_A))
-			m_CameraRotation += m_CameraRotationSpeed;
+			m_CameraRotation += m_CameraRotationSpeed * ts;
 		else if (Hazel::Input::IsKeyPressed(HZ_KEY_D))
-			m_CameraRotation -= m_CameraRotationSpeed;
+			m_CameraRotation -= m_CameraRotationSpeed * ts;
 
 
 		Hazel::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
@@ -248,9 +250,9 @@ private:
 
 	Hazel::OrthographicCamera m_Camera;
 	glm::vec3 m_CamraPosition;
-	float m_CameraMoveSpeed = 0.1f;
+	float m_CameraMoveSpeed = 5.f;
 	float m_CameraRotation = 0.0f;
-	float m_CameraRotationSpeed = 0.2f;
+	float m_CameraRotationSpeed = 180.f;
 };
 
 class Sandbox : public Hazel::Application
